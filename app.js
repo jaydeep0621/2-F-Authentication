@@ -6,6 +6,7 @@ const dotenv = require("dotenv").config();
 const cookieparser = require("cookie-parser")
 const routes = require("./src/routes/route");
 const i18n = require("i18n");
+require("./src/config/db");
 
 const app = express();
 const port = process.env.PORT;

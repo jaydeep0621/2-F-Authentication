@@ -19,6 +19,7 @@
   "homepage": "https://github.com/jaydeep0621/ShiftBits#readme",
   "dependencies": {
     "async": "^3.2.0",
+    "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
@@ -28,6 +29,7 @@
     "helmet": "^4.5.0",
     "i18n": "^0.13.2",
     "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.12.5",
     "nodemon": "^2.0.7"
   }
 }

@@ -1,3 +1,6 @@
 {
+    "SALT":{
+        "ROUNDS":10
+    },
     "JWTSECRET":"2dee49b61f515e14759eaca57ea23acbe766e8362c6908cfb28a17a34e6d60006e43a7ddb361cf4370bbc6ba0888c995ff0d84605851cc06ac183509127f74c8"
 }

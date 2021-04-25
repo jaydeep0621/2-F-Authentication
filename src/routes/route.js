@@ -6,12 +6,12 @@ const auth = require("../middleware/auth");
 
 router.use(bodyParser.json());
 
-router.get("/register", controller.register);
+router.get("/user/register", controller.register);
 
-router.post("/register", controller.register, auth.auth);
+router.post("/user/register", controller.register, auth.auth);
 
-router.post("/login", controller.login);
+router.post("/user/login", controller.login);
 
-router.post("/forgetpassword", controller.forgetpassword);
+router.post("/user/forgetpassword", controller.forgetpassword);
 
 module.exports = router;

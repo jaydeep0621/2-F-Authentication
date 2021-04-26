@@ -13,34 +13,34 @@ const httpstatus = require("../exception/httpstatus.json")
 module.exports = {
 
     //Hashing Password
-    passwordbcrypt: async(password)=>{
+    passwordbcrypt: async (password) => {
         let pass = bcrypt.hashSync(password, Number(Appconfig.SALT.ROUNDS));
-        return(pass);
+        return (pass);
     },
 
     //Registering user 
-    register: async(req,res,next)=> {
-        try{
-            const User = new user(req.body); 
+    register: async (req, res, next) => {
+        try {
+            const User = new user(req.body);
             const getmailresponse = await user.existemail(User.email);
             const getphoneresponse = await user.existphone(User.phone_number);
             const getidresponse = await user.existid(User.id_number);
 
-            if(getmailresponse){
+            if (getmailresponse) {
                 const err = {};
                 err.resmsg = i18n.__("EMAIL_ID_ALREADY_EXIST")
                 err.rescode = i18n.__("responsestatus.ERROR")
                 return next(err);
             }
 
-            if(getphoneresponse){
+            if (getphoneresponse) {
                 const err = {};
                 err.resmsg = i18n.__("PHONE_NUMBER_ALREADY_EXIST")
                 err.rescode = i18n.__("reponsestatus.ERROR")
                 return next(err);
             }
 
-            if(getidresponse){
+            if (getidresponse) {
                 const err = {};
                 err.resmsg = i18n.__("ID_NUMBER_ALREADY_EXIST")
                 err.rescode = i18n.__("reponsestatus.ERROR")
@@ -53,9 +53,9 @@ module.exports = {
             delete registeruser["password"];
 
             let token = jwt.sign({
-                id:registeruser["_id"],
-                email:registeruser["email"],
-                name:registeruser["name"],
+                id: registeruser["_id"],
+                email: registeruser["email"],
+                name: registeruser["name"],
             }, Appconfig.JWTSECRET);
 
             const sessionobj = new session();
@@ -73,7 +73,7 @@ module.exports = {
             );
 
         }
-        catch(err){
+        catch (err) {
             err.resmsg = i18n.__("SOMETHING_WENT_WRONG");
             err.rescode = i18n.__("responsestatus.ERROR");
             return next(err);
@@ -81,42 +81,42 @@ module.exports = {
     },
 
     //User Login
-    login: async(req,res,next)=>{
+    login: async (req, res, next) => {
         const data = new user(req.body);
         data["email"] = req.body.email.trim();
-        user.findOne({email:data["email"].trim()}, async(err,User)=>{
-            if(!User){
+        user.findOne({ email: data["email"].trim() }, async (err, User) => {
+            if (!User) {
                 const err = {};
                 err.resmsg = i18n.__("USER_DOES_NOT_EXIST");
                 err.rescode = i18n.__("responsestatus.ERROR");
                 return next(err);
             }
-            if(err){
+            if (err) {
                 const err = {};
                 err.resmsg = i18n.__("SOMETHING_WENT_WRONG");
                 err.rescode = i18n.__("responsestatus.ERROR");
                 return next(err);
             }
-            bcrypt.compare(data.password , User["password"], async(err,compare) => {
-                if(err){
+            bcrypt.compare(data.password, User["password"], async (err, compare) => {
+                if (err) {
                     const err = {};
                     err.resmsg = i18n.__("EMAIL_ID_OR_PASSWORD_DOESNOT_MATCH");
                     err.rescode = i18n.__("responsestatus.ERROR");
                     return next(err);
                 }
-                try{
+                try {
                     const userSession = {
-                        user_Id : User._id.toString()
+                        user_Id: User._id.toString()
                     }
                     const login = await session.checksession(userSession);
-                    if(login.length){
+                    if (login.length) {
                         await session.removesession();
                     }
 
                     let token = jwt.sign({
-                        id:User["_id"],
-                        email:User["email"],
-                        name:User["name"],
+                        id: User["_id"],
+                        email: User["email"],
+                        name: User["name"],
                     }, Appconfig.JWTSECRET);
 
                     User = User.toObject();
@@ -135,21 +135,21 @@ module.exports = {
                         i18n.__("responsestatus.Success")
                     )
                 }
-            catch(err){
-                console.log(err);
-                err.resmsg = i18n.__("SOMETHING_WENT_WRONG");
-                err.rescode = i18n.__("responsestatus.ERROR");
-                return next(err);
+                catch (err) {
+                    console.log(err);
+                    err.resmsg = i18n.__("SOMETHING_WENT_WRONG");
+                    err.rescode = i18n.__("responsestatus.ERROR");
+                    return next(err);
                 }
             });
         });
     },
 
     //forget password
-    forgetpassword: async(req,res,next)=>{
-        try{
+    forgetpassword: async (req, res, next) => {
+        try {
 
-        }catch(err){
+        } catch (err) {
             err.resmsg = i18n.__("SOMETHING_WENT_WRONG");
             return next(err);
         }

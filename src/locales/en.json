@@ -1,5 +1,14 @@
 {
-    "SOMETHING_WENT_WRONG" : "Something Went Wrong",
-    "SUCCESSFULLY_CAME_TO_GET_REGISTER" : "Successfully Came to Get Register",
-    "UNAUTHORIZED_USER" : "Unauthorized User"
+	"SOMETHING_WENT_WRONG": "Something Went Wrong",
+	"SUCCESSFULLY_CAME_TO_GET_REGISTER": "Successfully Came to Get Register",
+	"UNAUTHORIZED_USER": "Unauthorized User",
+	"EMAIL_ID_ALREADY_EXIST": "Email ID Already Exist",
+	"PHONE_NUMBER_ALREADY_EXIST": "Phone Number Already Exist",
+	"ID_NUMBER_ALREADY_EXIST": "Id Already Exist",
+	"USER_DOES_NOT_EXIST" :"User Doesnot Exist",
+	"EMAIL_ID_OR_PASSWORD_DOESNOT_MATCH":"Email Id or Password Doesnot Match",
+	"USER_SUCCESSFULLY_REGISTERED":"User Successfully Registered",
+	"SUCCESSFULLY_LOGIN" : "Successfully Login",
+	"responsestatus.ERROR": "responsestatus ERROR",
+	"responsestatus.Success" : "responsestatus.Success"
 }

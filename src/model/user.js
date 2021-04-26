@@ -16,9 +16,21 @@ const user = new mongoose.Schema(
             type: String,
             unique: true
         },
+        password:{
+            require: true,
+            type: String
+        },
         type_of_id:{
             require:true,
             type: String,
+        },
+        id_number:{
+            type: String,
+            required: true,
+            unique: true
+        },
+        date_of_birth:{
+            type: String
         },
         kyc_done:{
             type: Boolean,
@@ -33,5 +45,20 @@ const user = new mongoose.Schema(
         }
     }
 )
+
+user.static({
+
+    existemail(email){
+        return this.findOne({email:email});
+    },
+
+    existphone(phone_number){
+        return this.findOne({phone_number:phone_number});
+    },
+
+    existid(id_number){
+        return this.findOne({id_number:id_number});
+    }
+})
 
 module.exports = mongoose.model("User", user);
